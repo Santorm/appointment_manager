@@ -1,0 +1,615 @@
+
+/*@font-face {
+font-family: 'Eras Light ITC';
+font-style: normal;
+font-weight: normal;
+src: local('Eras Light ITC'), url("../fonts/ERASLGHT.woff") format('woff');
+}*/
+
+@font-face {
+font-family: 'raleway_thin-webfont';
+src: local('raleway_thin-webfont.woff'),
+	url("../fonts/raleway_thin-webfont.woff") format("woff");
+}
+
+@font-face {
+font-family: 'Montserrat Light';
+font-style: normal;
+font-weight: normal;
+src: local('Montserrat Light'), url('Montserrat Light.woff') format('woff');
+}
+
+body, html{
+
+	font-family: Montserrat Light, raleway_thin-webfont, sans-serif;
+    background-color:#F8F8FF; 
+	font-size: 16px;
+	text-decoration: none;
+    margin: auto;
+    
+}
+
+body{
+   
+    margin: auto;
+    
+}
+
+a{
+text-decoration: none;
+
+}
+h1{
+	display: inline;
+	font-style: none;
+	margin:0;
+	padding:0;
+	font-size:100%;
+	font-weight:normal;
+}
+
+#contenedor {
+    min-width: 400px;
+	max-width:1280px;
+	width:100%;
+	position:relative;
+	height:auto;
+	margin:auto;
+    background-color: white;
+	
+}
+
+/*DESDE AQUI HEADER*/
+
+header{
+	max-width:1024px;
+	position:relative;	
+	width:100%;
+	height:400px;
+	margin: auto;
+
+}
+
+.iconos_header{
+	position:relative;
+	width:100%;
+	margin:auto;
+	
+}
+
+
+#boton_reserva {
+	position: relative;
+    display: inline-block;
+    top: 5px;
+    width: 145px;
+    height: 32px;
+    border: solid 1px #EC664A;
+    border-radius: 3px;
+    background-color:#EC664A;
+  	}
+
+#boton_reserva span{
+    font-family: Montserrat Light;
+    font-size: 0.875em;
+    letter-spacing: 0;
+    color: #E5E4E5;
+    color: rgb(255, 255, 255);
+    vertical-align: 7px;
+    margin-left: 6px;
+    letter-spacing: -0.7;
+}
+
+#boton_reserva img{
+   
+    margin-left: 5px;
+    
+}
+
+.redes_sociales{
+	display: inline-block;
+    position: relative;
+    float: right;
+    top: 5px;
+}
+
+
+#campo_busqueda {
+	display: inline-block;
+    position: relative;
+    float: right;
+    top: 5px;
+}
+
+#busqueda {        
+     background-color:#FFFFFF;
+     background: url("../imagenes/icono_search_gris.png") no-repeat scroll 0 0 transparent;
+	 position:relative;
+	 top:0px;
+	 width: 160px;
+	 height: 32px;
+	 padding-left: 30px;
+	 background-position-y: 3px;
+    background-position-x: 3px;
+}
+
+
+#logotipo_header {
+	position: relative;
+    top: 100px;
+    margin: auto;
+    width: 47%;
+  
+}
+
+#logotipo_header img{
+	position: relative;
+   	 margin: auto;
+    width: 100%;
+  
+}
+
+.nav{
+	position: relative;
+    top: 175px;
+    width: 100%;
+    margin: auto;
+   
+}
+
+.nav li {
+   display: inline;
+   text-align: center;
+   text-decoration: none;
+}
+
+.nav a {
+
+font-family : Montserrat Light;
+  font-size : 1em;
+  line-height : 6.4px;
+  color : #8F8D8D;
+  color : rgb(143, 141, 141);
+
+}
+ 
+ .nav a:hover {
+	color: #3399cc;
+	font-weight: bold;
+}
+
+#menu {
+	display: flex;
+    justify-content: space-around;
+}
+
+#home {
+	float:inherit;
+	position: absolute;
+	left: 165px;
+	top: 350px;
+}
+
+
+/*HASTA AQUI HEADER*/
+
+
+/**/
+
+/*DESDE AQUI FOOTER*/
+
+footer{
+    position: relative;
+    width: 100%;
+    height:502px;
+    background-color: #4C4C4C;
+    
+}
+
+
+#contenido_footer {
+ position: absolute;
+    left: 135px;
+    top: 105px;
+    width: 571px;
+    height: 41px
+}
+#suscribete_footer {
+    position: absolute;
+    left: 572px;
+    top: 105px;
+    width: 40%;
+    height: 41px
+}
+
+#form_footer {
+    position: absolute;
+    left: 574px;
+    top: 203px;
+    width: 215px;
+    height: 79px;
+}
+
+#form_nombre{
+        position: relative;
+        left: 0px;
+        top: 0px;
+        width: 285px;
+        height: 30px;
+        font-size: 15px;
+        color: rgb(102, 102, 102);
+        line-height: 0.682;
+        text-align: left;
+}
+        
+#form_mail{
+        position: relative;
+        left: 0px;
+        top: 20px;
+        width: 285px;
+        height: 30px;
+        font-size: 15px;
+        color: rgb(102, 102, 102);
+        line-height: 0.682;
+        text-align: left;
+}
+#boton{
+    position: absolute;
+    left: 179px;
+    top: 139px;
+    width: 106px;
+    height: 29px;
+    background-color: #3399cc;
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 4px 4px 4px 4px;
+    border-color: #3399cc;      
+}
+
+#email_footer {
+    position: absolute;
+    left: 974px;
+    top: 206px;
+    width: 171px;
+    height: 18px;
+    color: white;
+}
+
+#lista_footer {
+    position: absolute;
+    left: 134px;
+    top: 195px;
+    width: 331px;
+    height: 282px;
+    color: white;
+    line-height: 26px
+
+}
+
+.linksfoote {
+    font-size: 16px;
+    color: white;
+    line-height: 1.6;
+    text-align: left;
+    width: 113px;
+    height: 15px;
+    
+    }
+
+.linksfoote:hover {
+    color: #818181;
+    font-weight: bold;
+}
+
+
+
+#footer_face {
+    position:absolute;
+    left:974px;
+    top:260px;
+    width:25px;
+    height:33px;
+}
+
+#footer_twitter {
+    position:absolute;
+    left:999px;
+    top:260px;
+    width:37px;
+    height:33px;
+}
+
+#footer_youtube {
+    position: absolute;
+    left: 1036px;
+    top: 260px;
+    width: 41px;
+    height: 33px;
+}
+
+#footer_inst {
+    position:absolute;
+    left:1077px;
+    top:260px;
+    width:38px;
+    height:33px;
+}
+
+#footer_pint {
+    position:absolute;
+    left:1115px;
+    top:260px;
+    width:30px;
+    height:33px;
+}
+
+#subir_footer {
+    position: absolute;
+    left: 95%;
+    top: 330px;
+    width: 31px;
+    height: 36px
+}
+
+
+
+@media only screen and (min-width:950px) and (max-width:1170px){
+
+#seccion_1{
+       margin: 70px auto 250px;    
+}  
+
+#seccion_2{
+   top:-150px;    
+}  
+
+#seccion_3{
+   top:-150px;    
+} 
+
+.cont_caja_secc_1{
+margin-right: 50px;
+}
+
+#footer_face {
+    display: none;
+}
+
+#footer_twitter {
+ display: none;
+}
+
+#footer_youtube {
+    display: none;
+}
+
+#footer_inst {
+display: none;
+}
+
+#footer_pint {
+display: none;
+}
+
+#email_footer {
+   display: none;
+}
+
+#suscribete_footer {
+    position: absolute;
+    left: 572px;
+    top: 105px;
+    width: 30%;
+    height: 41px;
+    overflow:hidden;
+
+}
+
+#foto_2_secc_1{
+
+      
+    position: relative;
+    width: 32%;
+    height: 400px;
+    background-image: url(../imagenes/equipolp.png);
+    right: 104px;
+    background-size: contain;
+    float: right;
+    bottom: 300px; 
+    background-repeat: no-repeat;
+}
+
+#dialogo_secc_1{
+    position: relative;
+    width: 450px;
+    height: 170px;
+    border: solid 1px #B5896A;
+    top: -25px;
+    /* left: 293px; */
+    text-align: center;
+    float: right;
+}
+
+}
+@media only screen and (min-width:755px) and (max-width:949px){
+
+#seccion_1{
+       margin: 70px auto 136px;    
+} 
+
+footer {
+display: none;
+}
+
+#foto_2_secc_1{
+    bottom: 330px;
+}
+
+#dialogo_secc_1{
+    top:-116px ;
+}
+
+#seccion_2{
+   top: -260px;    
+}  
+
+#seccion_3{
+   top: -260px;    
+} 
+        
+}
+
+@media only screen and (min-width:541px) and (max-width:755px){
+
+footer {
+display: none;
+}
+
+#contenedor{
+    width: 100%;
+    height: auto;
+}
+
+#section_iconos_informativos {
+flex-wrap: wrap;
+justify-content:space-around ;
+}
+
+.iconos_informativos {
+    width: 35.3%;
+  
+}
+
+#section_iconos_informativos {
+    height: auto;
+    padding-top:20px;
+     }
+
+
+.cajas_seccion_2 {
+    top: 268px;
+}    
+
+#foto_2_secc_1{
+    display: none;
+}
+
+#dialogo_secc_1{
+   display: none;
+}
+#seccion_2{
+    top:-760px;
+}
+
+#seccion_3{
+    top:-760px;
+}
+
+
+#text_galeria {
+    width: 246px;
+    font-size: 1.2em;
+    line-height: 28.4px;
+    left: 50%;
+}
+
+.tit_2{
+    font-size: 1.6em;
+    padding: 20px 10px;
+}
+
+}
+@media only screen and (max-width:540px){
+
+    #contenedor{
+    width: 100%;
+    height: auto;
+}
+
+#text_galeria{
+    display: none;
+}
+
+#foto_fondo_secc_1{
+    display: none;
+}
+
+
+#XXXseccion_1{
+    display: none;
+}
+
+#seccion_2 {
+   top: -330px;
+}
+
+#seccion_3 {
+   top: -330px;
+}
+
+.cajas_ofrecemos {
+    width: 100%;
+}
+
+.secc_3_cajas_ofrecemos {
+    width: 100%;
+    }
+
+#secc_3_aja_ofrecemos_1 {order: 1;}
+#secc_3_caja_ofrecemos_2 {order: 2;}
+#secc_3_caja_ofrecemos_3 {order: 4;}
+#secc_3_caja_ofrecemos_4 {order: 3;}
+
+
+footer {
+display: none;
+}
+
+#XXcontenedor{
+    width: 100%;
+    height: 1230px;
+}
+
+#section_iconos_informativos {
+flex-wrap: wrap;
+justify-content:space-around ;
+}
+
+.iconos_informativos {
+    width: 35.3%;
+  
+}
+
+#section_iconos_informativos {
+    height: auto;
+    padding-top:20px;
+     }
+
+
+.cajas_seccion_2 {
+    top: 268px;
+}    
+
+#foto_2_secc_1{
+    display: none;
+}
+
+#dialogo_secc_1{
+   display: none;
+}
+
+#busqueda{
+    display: none;
+}
+
+#secc_3_tit_2_quito {
+    
+    padding-left: 42px;
+}
+
+}
+
+
+
+/*HASTA AQUI FOOTER*/

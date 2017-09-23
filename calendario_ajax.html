@@ -1,0 +1,752 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Luna Piel _ calendario</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/calendar_style.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="css/estilos.css" media="screen" />
+<style type="text/css">
+
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script type="text/javascript">
+
+//AQUI EMPIEZA JAVASCRIPT
+
+//*****me quede retocando y para hacer que funcione el select y el dia escogido
+
+
+$(document).ready(inici);
+//var a;
+var meses=["Enero","Febrero", "Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+
+var dias=["L","Ma","Mi","J","V","S","D"];
+var primeros=[6,2,2,5,0,3,5,1,4,6,2,4];
+var finales=[31,28,31,30,31,30,31,31,30,31,30,31];
+//[1,1,4,6,2,4,0,3,5,1,3,6];
+
+var dias_disponibles_opcion_0=[];
+var dias_disponibles_opcion_1=[]; //empieza en 0, es decir Martes(1) y Jueves(3)
+var dias_disponibles_opcion_2=[];//lunes, mierc, viernes
+var dias_disponibles_opcion_3=[];//lun
+var dias_disponibles_opcion_4=[];
+var casillas_disponibles_opcion_1;
+var horario=["10h00","11h00","12h00","16h00","17h00","18h00","19h00"];
+var horas_opcion_0=[];
+var horas_opcion_1=[3,4,5,6];
+var horas_opcion_2=[0,1,2];
+var horas_opcion_3=[3,4,5];
+var horas_opcion_4=[0,1,2,3,4,5,6];
+var lunes=[];
+var martes=[];
+var miercoles=[];
+var jueves=[];
+var viernes=[];
+var sabado=[];
+var domingo=[];
+
+var opc_1=[];
+var opcio_1=[];
+var opcio_2=[];
+var opcio_3=[];
+var opcio_4=[];
+var horarios_semana=[];
+//el horario disponible simulado seria:
+//Consultas  de 16 a 19  3,4,5,6
+//trat 1 de 10 a 12h00 	0,1,2 
+//trat 2 de 16 a 19 3,4,5
+//trat 3 de 10 a 19 0-6
+
+//var w1="dias_disponibles_opcion_"; ejemplo para recuperar un valor del array
+//var w2=3;
+//alert(eval(w1+w2)[1]);
+
+var dia;
+var mes;
+var anio;
+var hoy = new Date();
+var dia_hoy = hoy.getDate();
+var mes_hoy = hoy.getMonth()+1; //hoy es 0!
+var anio_hoy = hoy.getFullYear();
+indice_meses=mes_hoy-1;
+var bajar_pantalla1;
+var bajar_pantalla2;
+var bajar_pantalla3;
+var enviar_mail=true;
+//alert("indice meses"+indice_meses);
+//alert(meses[indice_meses]);
+
+
+
+      function inici(){
+
+ 	$.ajax({
+            type:"GET",
+            url:"datos_calendario.xml",
+            datatype:"xml",
+            success:function (a){
+
+               $(a).find("opcion").each(function(){
+         var n=$(this).find("lunes").text();
+                  lunes.push(n);
+                  martes.push($(this).find("martes").text());
+                  miercoles.push($(this).find("miercoles").text());
+                  jueves.push($(this).find("jueves").text());
+                  viernes.push($(this).find("viernes").text());
+                  sabado.push($(this).find("sabado").text());
+                  domingo.push($(this).find("domingo").text());
+
+
+               });
+
+               	
+               
+
+
+            }
+
+
+
+         });
+
+
+
+
+crear_desplegable();
+crear_calendario_actual();
+$("#regresar").click(regresar);	
+$("#bot_mes_anterior").click(mes_anterior); 		//EVENTO BOTON ANTERIOR MES
+$("#bot_mes_siguiente").click(mes_siguiente);		//EVENTO BOTON SIGUIENTE MES
+$(".input_op").click(seleccionar);
+//$(".caja_dias").click(pedir_cita); //EVENTO QUE PIDE CITA
+
+$("#titulo_calendario, #botones_mes, #calendario").css("visibility","hidden");
+
+
+}
+
+
+/*function pedir_cita(){
+	$(".caja_dias").click(pedir_cita2); //EVENTO QUE PIDE CITA
+}*/
+
+
+function crear_arrays(){
+
+
+
+opc_1=[lunes[0],martes[0],miercoles[0],jueves[0],viernes[0],sabado[0],domingo[0]];
+opc_2=[lunes[1],martes[1],miercoles[1],jueves[1],viernes[1],sabado[1],domingo[1]];
+opc_3=[lunes[2],martes[2],miercoles[2],jueves[2],viernes[2],sabado[2],domingo[2]];
+opc_4=[lunes[3],martes[3],miercoles[3],jueves[3],viernes[3],sabado[3],domingo[3]];
+
+
+for(i=0;i<7;i++){
+	if(opc_1[i] == 1){
+		dias_disponibles_opcion_1.push(i);
+	}
+}
+
+for(i=0;i<7;i++){
+	if(opc_2[i] == 1){
+		dias_disponibles_opcion_2.push(i);
+	}
+}
+
+for(i=0;i<7;i++){
+	if(opc_3[i] == 1){
+		dias_disponibles_opcion_3.push(i);
+	}
+}
+
+for(i=0;i<7;i++){
+	if(opc_4[i] == 1){
+		dias_disponibles_opcion_4.push(i);
+	}
+}
+
+
+
+}
+
+
+ 	
+ 
+
+ 
+
+function crear_desplegable(){
+	
+	
+
+	$("#contenedor").append('<div id="tratamientos"></div>');
+
+	$("#tratamientos").append('<p id="titulo_desplegable">Reserva: Elige el motivo de consulta:</p><div id="seleccion"><div class="input_op" name="opcion_1" id="opcion1">Primera Consulta</div><div class="input_op" name="opcion_2" id="opcion2">Control</div><div class="input_op" name="opcion_3" id="opcion3">Tratamientos</div><div class="input_op" name="opcion_4" id="opcion4">Tratamiento 2</div></div>');
+	$("#contenedor").append('<div id="regresar">^</div>');
+
+
+}
+
+function seleccionar(){
+	
+	crear_arrays();
+
+	$("#caja_horarios,#titulo_confirmacion,#texto_confirmacion,#titulo_horarios,#formulario_confirmacion").remove(); //borra caja horarios para reiniciar la app.
+	$("#calendario .caja_dias").attr("value","deseleccionado")
+	$("#titulo_calendario, #botones_mes, #calendario").css("visibility","visible");
+
+	$(".input_op").css({"opacity":"0.7","background":"none","color":"#5F9EA0"});
+ 	$(this).css({"opacity":"1","background":"#5F9EA0","color":"white"});
+ 	var opcion_escogida=$(this).attr("name");
+ 	var q1=opcion_escogida.indexOf("_");
+ 	q2=opcion_escogida.substring(q1+1);
+ 	//var q3="escoger_opcion_"+q2+"()";
+ 	q3=eval("escoger_opciones("+q2+")");
+ 	trat_escogido=$("#opcion"+q2).html();
+
+}
+
+function escoger_opciones(a){
+
+		
+			
+			var array_disponibilidad=(eval("dias_disponibles_opcion_"+a)); //crea el array de disponibilidad segun el a de la f seleccionar
+			
+			crear_calendario();
+			$(".caja_dias").click(pedir_cita);
+
+					$(".caja_dias").css({"background-color":"white","opacity":"0.5"});
+					$(".dias_semana").css({"background-color":"white","opacity":"1"});
+
+					for(k=1;k<7;k++){
+						for(i=0;i<array_disponibilidad.length;i++){
+							$("#calendario .caja_dias").eq((array_disponibilidad[i])+7*k).css({"color":"#5F9EA0","border":"solid 1px #5F9EA0","background-color":"white","opacity":"1","cursor":"pointer"}).attr("value","seleccionado");
+						}
+					}
+			mover_1();
+		
+	}
+
+
+	function pedir_cita(){
+	if($(this).css("cursor")=="pointer"){
+		$(".caja_dias").css("opacity","0.5");
+		$(this).css({"opacity":"1","color":"white","background-color":"#5F9EA0"});
+		$(".dias_semana").css("opacity","1");
+		crear_horario();
+		$(".caja_dias").unbind();
+		//$(".input_op").unbind();
+		//$("#bot_mes_anterior").unbind().css("opacity","0.3");
+		//$("#bot_mes_siguiente").unbind().css("opacity","0.3");
+		}
+		dia_confirmado=$(this).html();
+		//$(this).click(seleccionar());
+
+		$(".caja_dias[value=seleccionado]").click(reset_dia);
+		
+}
+
+
+function reset_dia(){
+	//id_seleccion=$(this).attr("id")
+	//alert(id_seleccion);
+	
+
+	$("#caja_horarios,#titulo_confirmacion,#texto_confirmacion,#titulo_horarios,#formulario_confirmacion").remove();
+	$(".caja_dias").css({"background-color":"white","opacity":"0.5","color":"#5F9EA0"});
+	$(this).css({"opacity":"1","background":"#5F9EA0","color":"white"});
+	escoger_opciones(q2);
+
+
+}
+function crear_calendario_actual(){	
+//SE CREA LAS CAJAS CON LOS NUMBRES DE LOS DIAS	
+			$("#contenedor").append('<p id="titulo_calendario">Haz click sobre el día que deseas reservar cita:</p>');
+			$("#contenedor").append('<div id="botones_mes"><div id="bot_mes_anterior"><</div><div id="mes"></div><div id="bot_mes_siguiente">></div></div>');
+			$("#contenedor").append('<div id="calendario"></div>');
+
+			$("#calendario").html('<div class="caja_dias dias_semana">lun</div><div class="caja_dias dias_semana">mar</div><div class="caja_dias dias_semana">mie</div><div class="caja_dias dias_semana">jue</div><div class="caja_dias dias_semana">vie</div><div class="caja_dias dias_semana">sab</div><div class="caja_dias dias_semana">dom</div>');
+
+
+			
+			$("#mes").html(meses[mes_hoy-1]);  		//CREA EL NOMBRE DEL DÍA ACTUAL
+			
+			var dia_inicio=primeros[indice_meses];	//INDICE MESES ES IGUAL AL VALOR DEL MES DE 0 A 11 DE ENERO A DIC. DEVUELVE EL NUMERO DE DIA QUE EMPIEZA 
+			var dia_final=finales[indice_meses];
+			
+			
+
+			for(j=0;j<dia_inicio;j++){
+			$("#calendario").append('<div class="caja_dias borrar_cajas"></div>');
+		}
+			$(".borrar_cajas").css("visibility","hidden");
+			for(i=1;i<=dia_final;i++){				//ESCRIBE LOS NUMEROS DE TODO EL MES ***********falta CAMBIAR EL FINDEL MES 29, 30, 31
+			$("#calendario").append('<div class="caja_dias" id="dia_'+i+'">'+i+'</div>');
+		}
+				
+			$("#dia_"+dia_hoy).css("border","solid 1px blue");
+		
+
+}
+
+function crear_calendario(){		//crea el nuevo calendario despues de hacer click en el siguiente o anterior mes
+			
+			
+			
+
+			$("#calendario").html('<div class="caja_dias dias_semana">lun</div><div class="caja_dias dias_semana">mar</div><div class="caja_dias dias_semana">mie</div><div class="caja_dias dias_semana">jue</div><div class="caja_dias dias_semana">vie</div><div class="caja_dias dias_semana">sab</div><div class="caja_dias dias_semana">dom</div>');
+			
+			var dia_inicio=primeros[indice_meses];
+			var dia_final=finales[indice_meses];
+			/*if(meses[indice_meses]==meses[mes_hoy-1]){
+			
+			$("#dia_"+dia_hoy).css("background-color","yellow");
+			}*/
+
+			for(j=0;j<dia_inicio;j++){
+			$("#calendario").append('<div class="caja_dias borrar_cajas"></div>');
+		}
+			$(".borrar_cajas").css("visibility","hidden");
+
+			for(i=1;i<=dia_final;i++){
+			$("#calendario").append('<div class="caja_dias" id="dia_'+i+'">'+i+'</div>');
+		}
+		
+			//alert(meses[indice_meses]);
+
+
+
+			if(meses[indice_meses]==meses[mes_hoy-1]){
+			
+			$("#dia_"+dia_hoy).css("background-color","yellow");
+			}
+
+			//$('#seleccion > option[value="opcion_0"]').attr('selected','selected');
+
+
+			
+			
+			
+}
+
+
+
+
+
+function mes_siguiente(){
+	//alert(indice_meses);
+	//$("#seleccion").val("opcion");   esta opcion reiniciaba el select cuando se cambia de mes
+	if(indice_meses <11){	
+		indice_meses++
+		var mes_actual=meses[indice_meses];
+		$("#mes").html(mes_actual);
+	}else{
+		indice_meses=-1;
+		mes_siguiente();
+	}
+
+	crear_calendario();
+	escoger_opciones(q2);
+	$("#caja_horarios,#titulo_confirmacion,#texto_confirmacion,#titulo_horarios,#formulario_confirmacion").remove();
+
+	
+	
+	
+}
+
+function mes_anterior(){
+	//alert(indice_meses+" ant");
+	//$("#seleccion").val("opcion");
+
+	if(indice_meses >0){
+		
+		indice_meses--
+	//alert(indice_meses+" despues");
+		var mes_actual=meses[indice_meses];
+		$("#mes").html(mes_actual);
+	}else{
+		indice_meses=12;
+		mes_anterior();
+	}
+	crear_calendario();
+	escoger_opciones(q2);
+	$("#caja_horarios,#titulo_confirmacion,#texto_confirmacion,#titulo_horarios,#formulario_confirmacion").remove();
+}
+
+ 
+
+
+function crear_horario(){
+
+
+	   $("#contenedor").append('<div id="caja_horarios"><p id="titulo_horarios">Elige el horario disponible</p><form id="horarios"></form></div>');
+
+	   		
+	   		
+	
+	   		for(i=0;i<eval('horas_opcion_'+q2+'.length');i++){
+			var k=eval('horario[horas_opcion_'+q2+'['+i+']]');
+			
+			
+
+			$("form#horarios").append('<div class="horas_disponibles"><div class="horas" id="hora_'+i+'" value="'+k+'">'+k+'</div></div>');
+
+			//$("form#horarios").append('<input class="radio_bot" type="radio" name="horario" value="'+k+'">'+k+'<br>');
+			}
+			
+			//$(input[type=radio]:checked).css({background:gold});
+			
+			//$("select").unbind();  //desactiva el select
+			$(".horas").click(recuperar_hora);
+			//$("#regresar").click(regresar);
+			mover_2();
+}
+
+function recuperar_hora(){
+	//$("#texto_confirmacion, #titulo_horarios, #formulario_confirmacion").remove();
+	hora_confirmada=($(this).html());
+	$(".horas").css({"background":"none","cursor":"pointer","opacity":"0.5"});
+	$(this).css({"opacity":"1","color":"white","background-color":"#5F9EA0","cursor":"pointer"});
+	confirmacion();
+	$(".horas").click(reset_horario); //cambia el horario escogido en dos tiempos para evitar una pulsacion accidental
+}
+
+function reset_horario(){
+	
+	$(".horas").css({"background":"none"});
+	$(this).css({"opacity":"1","color":"white","background-color":"#5F9EA0","cursor":"pointer"});
+	$("#caja_horarios,#titulo_confirmacion,#texto_confirmacion,#titulo_horarios,#formulario_confirmacion").remove();
+
+	crear_horario();
+}
+
+
+
+function confirmacion(){
+
+	$(".horas").unbind();
+	var tratamiento_confirmado=($(".input_op").eq(q2-1).html());
+	var mes_confirmado=($("#mes").html());
+	
+	
+	$("#contenedor").append('<p id="texto_confirmacion">Has escogido: '+tratamiento_confirmado+', el día '+dia_confirmado+' de '+mes_confirmado+' a las '+hora_confirmada+'</p><p id="titulo_confirmacion">Introduce tus datos para confirmar la cita:</p><form id="formulario_confirmacion"><input class="form_confirm" id="formu_nombre" type="text" placeholder="nombre"><br><input class="form_confirm" id="form_apellido" type="text" placeholder="apellido"><br><img id="icono_tel" src="imagenes/icono_tel.png"><input class="form_confirm" id="form_tel" type="tel" placeholder="teléfono"><br><img id="icono_email" src="imagenes/icono_email.png"><input class="form_confirm" id="form_email" type="email" placeholder="email"><br><input id="boton_enviar" type="button" value="Reservar Cita">')
+
+	$("#boton_enviar").click(enviar_formulario);	
+			mover_3();
+			
+
+		//$("#regresar").click();     
+
+	//alert('tipo de trat: '+tratamiento_confirmado+' mes: '+mes_confirmado+' día: hora: '+hora_confirmada+');
+}
+
+	function enviar_formulario(){
+		
+
+
+	$(".form_confirm").click(function(){$(this).val("").css("color","#5F9EA0");})
+	//validar
+	// Campos de texto
+    if($("#formu_nombre").val() == ""){
+        $("#formu_nombre").val("Debes completar tu nombre").css("color","#F08080");
+       // alert("El campo Nombre no puede estar vacío.");
+        $("#formu_nombre").focus();       // Esta función coloca el foco de escritura del usuario en el campo Nombre directamente.
+        enviar_mail=false;
+        }else{ enviar_mail=true;}
+
+    if($("#form_apellido").val() == ""){
+    	$("#form_apellido").val("Debes completar tu apellido").css("color","#F08080");
+       // alert("El campo Apellidos no puede estar vacío.");
+        $("#form_apellido").focus();
+        enviar_mail=false;
+       
+    }else{ enviar_mail=true;}
+
+    if($("#form_tel").val() == ""){
+    	$("#form_tel").val("Debes completar tu teléfono").css("color","#F08080");
+        //alert($("#formu_nombre").val()+" Necesitamos tu teléfono para contactarte.");
+        $("#form_tel").focus();
+        enviar_mail=false;
+        
+    }else{ enviar_mail=true;}
+
+    if($("#form_tel").val().match(/^\d+$/)){
+    	enviar_mail=true;
+      }else{
+      	$("#form_tel").val("El campo teléfono solo admite números").css("color","#F08080");
+      	//alert("El campo teléfono solo admite números");
+    	$("#form_tel").focus();
+    	enviar_mail=false;
+      }
+
+    /*if($("#form_email").val() == ""){
+
+    	
+    			$("#form_email").val($("#formu_nombre").val()+" Necesitamos tu email para confirmar tu cita").css("color","#F08080");
+    			//alert($("#formu_nombre").val()+" Necesitamos tu email para confirmar tu cita.");
+        		$("#form_email").focus();
+        }else{
+        	$("#form_email").val("Necesitamos tu email para confirmar tu cita").css("color","#F08080");
+    			//alert($("#formu_nombre").val()+" Necesitamos tu email para confirmar tu cita.");
+        	$("#form_email").focus();
+        }
+
+    }*/
+
+    emailExpReg = /[\w-\.]{3,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/
+ 	if($("#form_email").val().match(emailExpReg)){
+    	
+
+      }else{
+      		if($("#formu_nombre").val() != "Debes completar tu nombre"){
+      			$("#form_email").val($("#formu_nombre").val()+", debes introducir un e-mail válido").css("color","#F08080");
+        		$("#form_email").focus();
+        		
+      			}else{
+      				$("#form_email").val("Necesitamos tu email para confirmar tu cita").css("color","#F08080");
+    					//alert($("#formu_nombre").val()+" Necesitamos tu email para confirmar tu cita.");
+        			$("#form_email").focus();
+        			
+      			}
+      			enviar_mail=false;
+      }
+   
+   if(enviar_mail==true){
+   	enviar_reserva()
+   }
+                
+    }
+
+    function enviar_reserva(){
+    	alert("Tu cita ha sido reservada.");
+    }
+
+	
+
+	function mover_1(){
+
+			$("html, body").css("min-height","784px");	
+			bajar_pantalla1=$("#titulo_calendario").position().top;
+			$('html,body').delay(800).animate({scrollTop: bajar_pantalla1}, 1100);
+			$("#regresar").delay(500).animate({top: bajar_pantalla1+30}, 700);
+
+	}
+
+	function mover_2(){
+				$("html, body").css("min-height","1400px");
+	   			bajar_pantalla2=$("#titulo_horarios").position().top;
+				$('html,body').delay(1000).animate({scrollTop: bajar_pantalla2-30}, 1700);
+				$("#regresar").delay(700).animate({top: bajar_pantalla2}, 900);
+				
+
+			}
+
+	function mover_3(){
+
+			$("html, body").css("min-height","1800px");
+	   		bajar_pantalla3=$("#texto_confirmacion").position().top;
+	   		$("#regresar").delay(700).animate({top: bajar_pantalla3+180}, 700);
+			$('html,body').delay(1000).animate({scrollTop: bajar_pantalla3-30}, 1200);
+			
+			}
+
+function regresar(){
+		posicio_actual_boton=$("#regresar").position().top;
+		
+		
+			switch(posicio_actual_boton) {
+		    	case bajar_pantalla1+30: 
+		        	$('html,body').animate({scrollTop: 0}, 1200);
+		    		$("#regresar").animate({top: -50}, 700);
+					
+
+				break;
+		        
+		        case bajar_pantalla2: 
+		        	mover_1();
+
+			 		
+
+		        break;
+
+		        case bajar_pantalla3+180: 
+		        	mover_2();
+		    		
+
+		        break;
+		    
+		    	default:
+        			$('html,body').animate({scrollTop: 0}, 1200);
+		    		$("#regresar").animate({top: -50}, 700);
+					
+				}
+
+
+/*
+	$(".input_op").bind("click",seleccionar);
+	$("#bot_mes_anterior").bind("click",mes_anterior).css("opacity","1");
+	$("#bot_mes_siguiente").bind("click", mes_siguiente).css("opacity","1");
+	
+	$("#caja_horarios").remove();
+	$("select").removeAttr('disabled');
+	*/
+//***************************ME QUEDE INTENTANDO QUE EL SELECT VUELVA DEFAULT
+//YA SE CREA EL HORARIO Y AHORA FALTA QUE UNA VEZ SELECCIONADO SE VAYA A UN ARRAY O XML
+//DESPUES SE TIENE QUE COMPARAR QUE SI UN DÍA TIENE YA SELECCIONADO TODOS LOS HORARIOS YA NOP ESTE DISPONIBLE.
+	//crear_calendario();
+	//escoger_opciones(q2);
+}
+
+ 
+
+//el paciente escoja el tratamiento y se muestre las fechas disponibles
+//una vez escogida las fechas disponibles se muestra un mensaje de confirmación y un formulario de contacto.
+//para esto ya debo tenerlos datos: 
+//falta también hacer que aparezca el antes y el despues...
+//se puede hacer el antes y despues con drag o con una animación
+
+
+//INFROMACION QUE NECESITO:
+	//Fechas disponibles para cada tratamiento:
+		//Martes y Jueves Consulta primera vez.
+		//lunes miercoles y viernes Tratamiento 1.
+		//Tratamiento 2 y tratamiento 3 todos los días.	
+		//horarios, cada hora de 9 a 12 y de 17h a 19h.
+
+	//necesito recuperar información del paciente:
+		//qué fecha y hora escogio
+		//formulario de contacto, nombre, mail, tlf.
+
+
+
+
+</script>
+
+</head>
+<body>
+
+
+
+
+
+
+<div id="contenedor">
+<header>
+				<div class="iconos_header">
+						  <div id="boton_reserva">
+							<a href="calendario_ajax.html"><img src="imagenes/calendario_gris_fondo_rosa.png" title="reserva cita"><span>Reserva tu Cita</span></a>
+						  </div>
+						  
+						  
+						      
+						  
+						  <div class="redes_sociales facebook">
+							<a href="https://www.facebook.com/lunapiel.ec/" target="_blank"><img src="imagenes/Sector_06.png" title="facebook"/></a>
+						  </div>
+
+						  <div class="redes_sociales twitter">
+							<a href="http://www.twitter.com" target="_blank"><img src="imagenes/Sector_07.png" title="twitter"/></a>
+						  </div>
+
+						  <div class="redes_sociales youtube">
+							<a href="#" target="_blank"><img src="imagenes/Sector_08.png" title="youtube"/></a>
+						  </div>
+						  <div class="redes_sociales instagram">
+							<a href="#" target="_blank"><img src="imagenes/Sector_09.png" title="instagram"/></a>
+						  </div>
+						  <div class="redes_sociales pinterest">
+							<a href="#" target="_blank"><img src="imagenes/Sector_10.png" title="pinterest"/></a>
+						  </div>
+						  <div id="campo_busqueda"><input id="busqueda" type="search" alt="Buscar en esta página">
+						  </div>
+
+
+			  </div>
+
+			  <div id="logotipo_header">
+				<a href="index_ajax.html"><img src="imagenes/logo_gold.png" title="lunapiel"/></a>
+			  </div>
+				    
+			  <nav class="nav">
+					  <ul id="menu">
+						  <li><h1><a href="derm_clinica.html">Conoce LunaPiel</a></h1></li>
+						  <li><h1><a href="#">Dermatología Clínica | Quirúrgica | Estética </a></h1></li>
+						  <li><h1><a href="#">Blog | Promociones</a></h1></li>
+						  <li><h1><a href="index_ajax.html">Contáctanos</a></h1></li>
+					  </ul>
+					  
+					  <!--VER SI ES MEJOR METERLE EN UN LI -->
+			  </nav>
+ </header>
+
+
+	
+	
+
+
+</div>
+
+<footer>	
+	
+	<div id="contenido_footer">
+		<img src="imagenes/Sector_98.png"/>
+	</div>
+	<div id="suscribete_footer">
+		<img src="imagenes/Sector_100.png"/>
+	</div>
+	<div id="form_footer">
+		 
+        
+    <form>
+    <label id="form_nombre_label"></label>
+    <input id="form_nombre" type="text" placeholder="Introduce tu nombre"/> <br>
+    <label id="form_mail_label"></label>
+    <input id="form_mail" type="text" placeholder="Introduce tu e-mail"/> <br>
+    <input type="submit" id="boton" title="Pulse para enviar" value="Enviar"></form>
+
+	</div>
+	<div id="email_footer">
+		<p>lunapiel@gmail.com</p>
+		
+	</div>
+    
+ 	<ul id="lista_footer" class="linksfooter"> 
+    <li><a class="linksfoote" href="#">Equipo Médico</a></li>
+	<li><a class="linksfoote" href="derm_clinica.html">Dermatología Clínica</a></li>
+	<li><a class="linksfoote" href="#">Dermatología Quirúrgica</a></li>
+	<li><a class="linksfoote" href="#">Dermatología Estética Facial</a></li>
+	<li><a class="linksfoote" href="#">Dermatología Estética Corporal</a></li>
+	<li><a class="linksfoote" href="#">Técnicas Aplicada</a></li>
+    <li><a class="linksfoote" href="#">Blog</a></li>
+	</ul> 
+    
+	  
+  	<div id="footer_face">
+	<a href="https://www.facebook.com/lunapiel.ec/" target="_blank"><img src="imagenes/Sector_111.png" title="facebook"/></a>
+	</div>
+    <div id="footer_twitter">
+	<a href="#"><img src="imagenes/Sector_112.png" title="twitter"/></a>
+	</div>
+	<div id="footer_youtube">
+	<a href="#"><img src="imagenes/Sector_113.png" title="youtube"/></a>
+	</div>
+	<div id="footer_inst">
+	<a href="#"><img src="imagenes/Sector_114.png" title="instagram"/></a>
+	</div>
+	<div id="footer_pint">
+	<a href="#"><img src="imagenes/Sector_115.png" title="pinterest"/></a>
+	</div>
+	<div id="subir_footer">
+	<a href="#"><img src="imagenes/Sector_122.png"/></a>
+	</div>
+	  
+  
+</footer>
+
+
+
+</body>
+</html>

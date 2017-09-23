@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<horarios>
+
+	<opcion>
+		<tratamiento>Primera consulta</tratamiento>
+			<lunes>0</lunes>
+			<martes>1</martes>
+			<miercoles>0</miercoles>
+			<jueves>1</jueves>
+			<viernes>0</viernes>
+			<sabado>0</sabado>
+			<domingo>0</domingo>
+		
+	</opcion>
+
+	<opcion>
+		<tratamiento>Control</tratamiento>
+			<lunes>1</lunes>
+			<martes>0</martes>
+			<miercoles>1</miercoles>
+			<jueves>0</jueves>
+			<viernes>1</viernes>
+			<sabado>0</sabado>
+			<domingo>0</domingo>
+		
+	</opcion>
+
+	<opcion>
+		<tratamiento>Dermatología</tratamiento>
+			<lunes>1</lunes>
+			<martes>1</martes>
+			<miercoles>1</miercoles>
+			<jueves>1</jueves>
+			<viernes>1</viernes>
+			<sabado>0</sabado>
+			<domingo>0</domingo>
+		
+
+	</opcion>
+
+	<opcion>
+	<tratamiento>Estética</tratamiento>
+			<lunes>1</lunes>
+			<martes>0</martes>
+			<miercoles>0</miercoles>
+			<jueves>0</jueves>
+			<viernes>0</viernes>
+			<sabado>1</sabado>
+			<domingo>0</domingo>
+		
+	</opcion>
+
+</horarios>

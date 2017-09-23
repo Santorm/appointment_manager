@@ -1,0 +1,319 @@
+
+@font-face {
+font-family: 'raleway_thin-webfont';
+src: local('raleway_thin-webfont.otf'),
+	url("../fonts/raleway_thin-webfont.woff") format("woff");
+}
+
+
+
+html{
+	 
+	font-family: Montserrat, raleway_thin-webfont, xRaleway Thin, xFutura, "Trebuchet MS", Arial, sans-serif;
+    letter-spacing: 0.5px;
+        
+}
+
+#contenedor{
+	width: 100%;
+    height: 100%;
+    margin: auto;
+    position: relative;
+    color:#4a4a4a;
+
+}
+
+#calendario{
+
+	position: relative;
+    margin: auto;
+    width: 350px;
+    height: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+#mes{
+	margin: auto;
+	width: 100px;
+	position: relative;
+	font-size: 22px;
+	text-align: center;
+}
+.caja_dias{
+	width: 44px;
+	height: auto;
+	background-color:#5F9EA0;
+	box-sizing:border-box;
+	 -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border-radius:7px;
+    border-radius: 3px;
+    padding: 5px;
+    margin: 3px;
+    cursor: default;
+
+}
+
+.dias_semana{
+	   background-color: white;
+    color: grey;
+    font-size: 16px;
+    text-align: center;
+    /* line-height: 9px; */
+    /* border: grey solid 1px; */
+    height: 31px;
+}
+
+#boton {
+    position: absolute;
+    left: 186px;
+    top: 125px;
+    width: 106px;
+    height: 29px;
+    background-color: #3399cc;
+    font-family: "Eras Light ITC";
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 4px 4px 4px 4px;
+    border-color: #3399cc;
+}
+
+#tratamientos{
+	    XXXXborder: dotted grey 1px;
+    width: 50%;
+    height: 150px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin: auto
+}
+
+
+#titulo_desplegable{
+
+	    /* display: block; */
+    width: 100%;
+    height: 20px;
+    text-align: center;
+    position: relative; 
+    top: 15px;
+}
+
+#titulo_calendario{
+
+	text-align: center;
+	margin: 40px auto;
+}
+
+
+#seleccion{
+	display: flex;
+	width: 100%;
+    position: relative;
+    height: 30px;
+    top: -40px;
+    font-size: 14px;
+    justify-content: space-around;
+    border-radius: 5px;
+}
+.input_op{
+    
+    display: inline-block;
+    height: 30px;
+    border: solid 1px #5F9EA0;
+    text-align: center;
+    line-height: 30px;
+    padding: 0px 12px;
+    border-radius: 20px;
+    width: auto;
+    color: #5F9EA0;
+    user-select: none;
+    cursor: pointer;
+    
+}
+
+
+#botones_mes{
+	    width: 42%;
+    height: 50px;
+    margin-top: 50px;
+    display: flex;
+    margin: auto;
+    user-select: none;
+    cursor: default;
+    
+}
+
+#bot_mes_anterior{
+float: left;
+    font-size: 40px;
+        user-select: none;
+    cursor: pointer;
+}
+#bot_mes_siguiente{
+float: right;
+    font-size: 40px;
+        user-select: none;
+    cursor: pointer;
+} 
+
+#caja_horarios{
+
+    width: 100%;
+    height: auto;
+    margin: 50px auto;
+
+}
+
+form#horarios{
+ 	width: 400px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+}
+
+.horas_disponibles{
+width: 50px;
+height: 50%;
+}
+
+
+#titulo_horarios{
+	margin: auto;
+    width: 350px;
+    height: 30px;
+    text-align: center;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.radio_bot{
+	background-color: #5F9EA0;
+}
+
+.horas{
+	background-color: white;
+	border:solid 1px #5F9EA0;
+    line-height: 24px;
+    width: 75px;
+    border-radius: 30px;
+    font-size: 13px;
+    color: #5F9EA0;
+    user-select:none;
+    cursor: pointer;
+}
+
+
+#titulo_confirmacion{
+margin: auto;
+    width: 100%;
+    height: 30px;
+    text-align: center;
+}
+
+#texto_confirmacion{
+    margin: auto;
+    width: 700px;
+    height: 40px;
+    text-align: center;
+    font-size: 17px;
+    border: solid 1px #5F9EA0;
+    border-radius: 10px;
+    line-height: 40px;
+    margin-bottom: 30px;
+    background-color: #5F9EA0;
+    color: white;
+}
+
+
+#formulario_confirmacion{
+	
+    position: relative;
+    margin: auto;
+    width: 350px;
+    text-align: center
+
+}
+
+#formulario_confirmacion input{
+
+	vertical-align: middle;
+    text-align: center;
+    /* border-radius: 20px; */
+    border: solid 1px #5F9EA0;
+    margin-top: 5px;
+    width: 245px;
+    margin-top: 19px;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    opacity: 0.7;
+    font-size: 11px;
+}
+
+#formulario_confirmacion input:hover{
+opacity: 1;
+}
+
+
+input#boton_enviar{
+    background-color: white;
+    border: solid 1px #5F9EA0;
+    line-height: 24px;
+    width: 100px;
+    border-radius: 30px;
+    font-size: 13px;
+    color: #5F9EA0;
+    user-select: none;
+    cursor: pointer;
+}
+
+#regresar{
+    width: 30px;
+    height: 30px;
+    border: solid 2px #5F9EA0;
+    border-radius: 50%;
+    position: absolute;
+    text-align: center;
+    line-height: 25px;
+    font-weight: bolder;
+    top: 200px;
+    left: 900px;
+
+}
+
+
+
+#icono_email{
+
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 127px;
+    left: 40px;
+
+}
+
+#icono_tel{
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 90px;
+    left: 40px;
+	
+}
+
+footer{
+	margin-top: 50px; 
+}
